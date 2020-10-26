@@ -1,0 +1,18 @@
+div {
+  box-sizing: border-box;
+  /*border: 1px solid;*/
+  width: 50%;
+  font-family: "Noto Sans";
+  white-space: pre-wrap;
+  display: inline-block;
+  vertical-align: top;
+}
+div.language {
+  width: 33%;
+}
+ruby {
+  /*ruby-position: under;*/
+}
+rt {
+  font-size: 80%
+}

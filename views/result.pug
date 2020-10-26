@@ -1,0 +1,33 @@
+html
+  head
+    link(href="_common.css", rel="stylesheet")
+    link(href="result.css", rel="stylesheet")
+    script(src="result.js")
+    title romanize chinese / result
+
+  body
+    h1 romanize chinese
+    h2 result
+
+    button(style="display: block;") back
+
+    for data, i in [emc, cmn, yue]
+      div.language
+        h3
+          if i == 0
+            | EMC (modified <a href="https://zh.wikipedia.org/zh/User:Polyhedron/%E4%B8%AD%E5%8F%A4%E6%BC%A2%E8%AA%9E%E6%8B%BC%E9%9F%B3">polyhedron's system</a>)
+          else
+            | #{[null, "mandarin", "yue"][i]}
+        div.ruby
+          for datum in data
+            if datum[1]
+              ruby #{datum[0]}
+                rt= datum[1].slice().reverse().join("\n")
+            else
+              | #{datum[0]}
+        div.only
+          for datum in data
+            if datum[1]
+              | #{datum[1][0]}
+            else
+              | #{datum[0]}

@@ -1,0 +1,30 @@
+html
+  head
+    link(href="_common.css", rel="stylesheet")
+    link(href="index.css", rel="stylesheet")
+    script(src="index.js")
+    title romanize chinese
+
+  body
+    h1 romanize chinese
+
+    if text
+      textarea.
+        #{decodeURIComponent(text)}
+    else
+      textarea
+        include 千字文.txt
+
+    //
+      幫 滂 並 明
+      非 敷 奉 微
+      端 透 定 泥
+      知 徹 澄 娘
+
+      精 清 從 來 心 邪
+      照 穿 牀 日 審 禪
+
+      見 溪 群 疑
+      影 ＿ ＿ 喻 曉 匣
+
+    button convert
