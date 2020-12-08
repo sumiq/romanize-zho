@@ -146,6 +146,98 @@ const cmn = text =>
       }
     })
 
+const cmnBpmf = text =>
+  [].concat.apply([],
+    text
+      .split(/(?<=\p{sc=Han})(?!\p{sc=Han})|(?<!\p{sc=Han})(?=\p{sc=Han})/u)
+      .map(s => /^\p{sc=Han}+$/u.test(s)
+        ?
+        pinyin(s, {
+          style: pinyin.STYLE_TONE2,
+          heteronym: true,
+          segment: true,
+        })
+          .map((phonetics, i) =>
+            phonetics.every(phonetic => /^[a-z]+[1-4]?$/.test(phonetic))
+              ? [s[i], phonetics]
+              : phonetics
+          )
+        : [...s].map(c => [c])
+      )
+  )
+    .map(([c, phonetics]) => {
+      if (!phonetics)
+        return [c]
+      else {
+        return [c,
+          phonetics.map(phonetic => {
+            let [syllable, tone] = cmnSyllable(phonetic);
+
+            let emcs = emcsOf(c);
+            if (emcs) {
+              if (emcs.some(emc => /^[cʒsz]/.test(emc[0])))
+                syllable = syllable
+                  .replace(/^g(?=[iy])/, "z")
+                  .replace(/^k(?=[iy])/, "c")
+                  .replace(/^h(?=[iy])/, "s");
+              else if (emcs.some(emc => /^ŋ/.test(emc[0])))
+                syllable = syllable.replace(/^(?=[iuyea])/, "ŋ");
+              else if (emcs.some(emc => /^m/.test(emc[0])))
+                syllable = syllable
+                  .replace(/^u(?!$)/, "mu");
+            }
+
+            syllable = syllable
+              .replace(/^b/, "ㄅ")
+              .replace(/^p/, "ㄆ")
+              .replace(/^m/, "ㄇ")
+              .replace(/^f/, "ㄈ")
+
+              .replace(/^d/, "ㄉ")
+              .replace(/^t/, "ㄊ")
+              .replace(/^n/, "ㄋ")
+              .replace(/^l/, "ㄌ")
+
+              .replace(/^g/, "ㄍ")
+              .replace(/^k/, "ㄎ")
+              .replace(/^ŋ/, "ㄫ")
+              .replace(/^h/, "ㄏ")
+
+              .replace(/^j/, "ㄓ")
+              .replace(/^q/, "ㄔ")
+              .replace(/^x/, "ㄕ")
+              .replace(/^r/, "ㄖ")
+
+              .replace(/^z/, "ㄗ")
+              .replace(/^c/, "ㄘ")
+              .replace(/^s/, "ㄙ")
+
+              .replace(/er$/, "ㄦ")
+              .replace(/ei$/, "ㄟ")
+              .replace(/eu$/, "ㄡ")
+              .replace(/en$/, "ㄣ")
+              .replace(/eŋ$/, "ㄥ")
+              .replace(/e$/, "ㄛ")
+
+              .replace(/ai$/, "ㄞ")
+              .replace(/au$/, "ㄠ")
+              .replace(/an$/, "ㄢ")
+              .replace(/aŋ$/, "ㄤ")
+              .replace(/a$/, "ㄚ")
+
+              .replace(/i/, "ㄧ")
+              .replace(/u/, "ㄨ")
+              .replace(/y/, "ㄩ")
+
+            tone = ["ˉ", "ˊ", "ˇ", "ˋ", "˙",][tone];
+
+            return syllable + tone;
+          })
+        ]
+      }
+    })
+
+
 const jyutpingsOf = JSON.parse(fs.readFileSync("yue.json"))
 
 const unvoice = syllable =>
@@ -284,4 +376,4 @@ const yueAsciify = data =>
     )]
   )
 
-module.exports = { emc, yue, cmn, yueAsciify, };
+module.exports = { emc, yue, cmn, cmnBpmf, yueAsciify, };

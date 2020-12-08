@@ -21,10 +21,11 @@ html
       button(data-language="yue").selected yue
       button(data-language="yue-ascii") yue (ASCII)
       button(data-language="cmn") mandarin
+      button(data-language="cmn-bpmf") mandarin (bopomofo)
 
     .languages
-      for data, i in [emc, yue, yueAscii, cmn,]
-        div(id=["emc", "yue", "yue-ascii", "cmn",][i], class=i == 1 ? "selected" : "").language
+      for data, i in [emc, yue, yueAscii, cmn, cmnBpmf,]
+        div(id=["emc", "yue", "yue-ascii", "cmn", "cmn-bpmf",][i], class=i == 1 ? "selected" : "").language
           div.ruby
             for datum in data
               if datum[1]

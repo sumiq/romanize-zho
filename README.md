@@ -16,7 +16,7 @@ node index
 |    tenuis | g        | j         | d      | z      | b      |
 | aspirated | k        | q         | t      | c      | p      |
 | fricative | h        | x         |        | s      | f      |
-|     nasal | ŋ        | v         | n      |        | m      |
+|     nasal | v        |           | n      |        | m      |
 |    liquid |          | r         | l      |        |        |
 
 ### glide

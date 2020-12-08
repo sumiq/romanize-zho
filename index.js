@@ -1,7 +1,7 @@
 const express = require("express");
 const sassMiddleware = require("node-sass-middleware");
 
-const { emc, yue, cmn, yueAsciify, } = require("./convert.js");
+const { emc, yue, yueAsciify, cmn, cmnBpmf, } = require("./convert.js");
 
 const app = express();
 app.set("view engine", "pug");
@@ -28,6 +28,7 @@ app.get("/result", (req, res) => {
     title: "romanize chinese: result",
     emc: emc(text),
     cmn: cmn(text),
+    cmnBpmf: cmnBpmf(text),
     yue: yue(text),
     yueAscii: yueAsciify(yue(text)),
   });
@@ -39,6 +40,7 @@ app.get("/json", (req, res) => {
   res.end(JSON.stringify({
     emc: emc(text),
     cmn: cmn(text),
+    cmnBpmf: cmnBpmf(text),
     yue: yue(text),
     yueAscii: yueAsciify(yue(text)),
   }));
