@@ -16,7 +16,7 @@ node index
 |    tenuis | g        | j         | d      | z      | b      |
 | aspirated | k        | q         | t      | c      | p      |
 | fricative | h        | x         |        | s      | f      |
-|     nasal | v        |           | n      |        | m      |
+|     nasal | v (ŋ)    |           | n      |        | m      |
 |    liquid |          | r         | l      |        |        |
 
 ### glide
@@ -31,17 +31,17 @@ e a
 
 ### consonant
 
-|                                   | null | guttural | dental | dental | labial |
-| --------------------------------: | :--- | :------- | :----- | :----- | :----- |
-|                       high tenuis | q    | k        | t      | c      | p      |
-|                    high aspirated |      | kx       | tx     | cx     | px     |
-|         low (平\|上)-toned tenuis |      | gh       | dh     | rh     | bh     |
-|      low (去\|入)-toned aspirated |      | gx       | dx     | rx     | bx     |
-| remaining low tenuis or aspirated | ∅    | g        | d      | r      | b      |
-|                    high fricative |      | x        |        | s      | f      |
-|                     low fricative |      | h        |        | z      | w      |
-|                      low sonorant |      | ŋ        | n      | l      | m      |
-|                     high sonorant |      | qŋ       | qn     | ql     | qm     |
+|                               | null | guttural | dental | dental | labial |
+| ----------------------------: | :--- | :------- | :----- | :----- | :----- |
+|                   high tenuis | q    | k        | t      | c      | p      |
+|                high aspirated |      | kx       | tx     | cx     | px     |
+|      low (平\|上)-tone tenuis |      | gh       | dh     | rh     | bh     |
+|   low (去\|入)-tone aspirated |      | gx       | dx     | rx     | bx     |
+| other low tenuis or aspirated | ∅    | g        | d      | r      | b      |
+|                high fricative |      | x        |        | s      | f      |
+|                 low fricative |      | h        |        | z      | w      |
+|                  low sonorant |      | ŋ        | n      | l      | m      |
+|                 high sonorant |      | qŋ       | qn     | ql     | qm     |
 
 
 #### motivation
@@ -87,13 +87,13 @@ e a
 |       | front | center | back |
 | ----: | :---- | :----- | :--- |
 | close | i į   |        | u ų  |
-|   mid | e ę   | y      | o ǫ  |
+|   mid | e ę   | ə (y)  | o ǫ  |
 |  open | a ą   |        |      |
 
 |      | 平   | 上   | 去   | 入             |
 | ---: | :--- | :--- | :--- | :------------- |
 |   陰 | ◌́    | ◌̂    | ◌̀    | ◌̀ (q, k, t, p) |
-|   陽 | ◌̌    |      | ◌    | ◌́ (q, k, t, p) |
+|   陽 | ◌̌    |      |      | ◌́ (q, k, t, p) |
 
 ## references
 

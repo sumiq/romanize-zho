@@ -34,7 +34,7 @@ const emc = text =>
         syllable
           .replace(/$/, ["", "q", "s", ""][tone])
           .replace(/[ŋnm]$/, x => tone == 3 ? { ŋ: "k", n: "t", m: "p" }[x] : x)
-          .replace(/ŋ/g, "v")
+          //.replace(/ŋ/g, "v")
       )
     ]
   })
@@ -126,9 +126,9 @@ const cmn = text =>
 
             // prettify
             syllable = syllable
-              .replace(/e(?=[ŋnm])/, "")
-              .replace(/(?<=.)e(?=r)/, "")
-              .replace(/(?<=[iu])e(?=[iuy])/, "");
+              //.replace(/e(?=[ŋnm])/, "")
+              //.replace(/(?<=.)e(?=r)/, "")
+              .replace(/(?<=[iu])e(?=[iuyŋnm])/, "");
 
             tone = ["\u0304", "\u0301", "\u030C", "\u0300", "",][tone];
             if (/[ea]/.test(syllable))
@@ -140,7 +140,7 @@ const cmn = text =>
             else
               phonetic = syllable.replace(/(?<=[iuy])/, tone);
 
-            return phonetic.replace(/ŋ/g, "v").normalize("NFC");
+            return phonetic/*.replace(/ŋ/g, "v")*/.normalize("NFC");
           })
         ]
       }
@@ -245,7 +245,7 @@ const unvoice = syllable =>
     .replace(/^(?=[ŋnmljviyueøoəa])/, "q")
     .replace(/^g/, "k")
     .replace(/^d/, "t")
-    .replace(/^r/, "c")
+    .replace(/^ʒ/, "c")
     .replace(/^b/, "p")
     .replace(/^h/, "x")
     .replace(/^z/, "s")
@@ -292,7 +292,7 @@ const yue = text =>
           syllable = syllable
             .replace(/^k/, "g")
             .replace(/^t/, "d")
-            .replace(/^c/, "r")
+            .replace(/^c/, "ʒ")
             .replace(/^p/, "b")
             .replace(/^x/, "h")
             .replace(/^s/, "z")
@@ -331,8 +331,8 @@ const yue = text =>
 
         if ([0, 1].includes(tone))
           syllable = syllable
-            .replace(/(?<=^[gdrb])(?!x)/, "h")
-            .replace(/(?<=^[gdrb])x/, "")
+            .replace(/(?<=^[gdʒb])(?!x)/, "h")
+            .replace(/(?<=^[gdʒb])x/, "")
 
         if (
           phonetics.some(([syllable1, tone1]) =>
@@ -361,7 +361,7 @@ const yueAsciify = data =>
       p
         .normalize("NFD")
         .replace(/c/g, "ts")
-        .replace(/r/g, "dz")
+        .replace(/ʒ/g, "dz")
         .replace(/g/g, "c")
         .replace(/ŋ/g, "g")
         .replace(/ø/g, "eo")
