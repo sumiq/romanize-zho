@@ -34,7 +34,7 @@ const emc = text =>
         syllable
           .replace(/$/, ["", "q", "s", ""][tone])
           .replace(/[ŋnm]$/, x => tone == 3 ? { ŋ: "k", n: "t", m: "p" }[x] : x)
-          //.replace(/ŋ/g, "v")
+        //.replace(/ŋ/g, "v")
       )
     ]
   })
@@ -355,6 +355,43 @@ const yue = text =>
   ])
     .map(([c, ps]) => ps ? [c, ps] : [c]);
 
+const yueCompress = data =>
+  data.map(([c, ps]) =>
+    [c, ps?.map(p => {
+      p = p
+        .normalize("NFD")
+        .replace(/ʒ/, 'r')
+        .replace(/ı/g, "i")
+        .replace(/ȷ/g, "j");
+
+      if (/[ktp]$/.test(p)) { }
+      else if (/\u0300/.test(p))
+        p = p
+          .replace(/\u0300/, '')
+          .replace(/j$/, 'i')
+          .replace(/v$/, 'u');
+      else if (/\u0301/.test(p))
+        p = p
+          .replace(/\u0301/, '')
+          .replace(/$/, 'q')
+          .replace(/jq$/, 'j')
+          .replace(/vq$/, 'v')
+          .replace(/ŋq$/, 'g')
+          .replace(/nq$/, 'd')
+          .replace(/mq$/, 'b');
+      else
+        p = p
+          .replace(/$/, 's')
+          .replace(/js$/, 'e')
+          .replace(/vs$/, 'o')
+          .replace(/ŋs$/, 'h')
+          .replace(/ns$/, 'z')
+          .replace(/ms$/, 'w');
+
+      return p.normalize("NFC");
+    })]
+  )
+
 const yueAsciify = data =>
   data.map(([c, ps]) =>
     [c, ps?.map(p =>
@@ -374,6 +411,6 @@ const yueAsciify = data =>
         .replace(/[\u0300\u0301]/g, "")
         .normalize("NFC")
     )]
-  )
+  );
 
-module.exports = { emc, yue, cmn, cmnBpmf, yueAsciify, };
+module.exports = { emc, yue, cmn, cmnBpmf, yueCompress, };

@@ -1,7 +1,7 @@
 const express = require("express");
 const sassMiddleware = require("node-sass-middleware");
 
-const { emc, yue, yueAsciify, cmn, cmnBpmf, } = require("./convert.js");
+const { emc, yue, yueCompress, cmn, cmnBpmf, } = require("./convert.js");
 
 const app = express();
 app.set("view engine", "pug");
@@ -30,7 +30,8 @@ app.get("/result", (req, res) => {
     cmn: cmn(text),
     cmnBpmf: cmnBpmf(text),
     yue: yue(text),
-    yueAscii: yueAsciify(yue(text)),
+    //yueAscii: yueAsciify(yue(text)),
+    yueCompressed: yueCompress(yue(text)),
   });
 });
 
@@ -42,7 +43,8 @@ app.get("/json", (req, res) => {
     cmn: cmn(text),
     cmnBpmf: cmnBpmf(text),
     yue: yue(text),
-    yueAscii: yueAsciify(yue(text)),
+    //yueAscii: yueAsciify(yue(text)),
+    yueCompressed: yueCompress(yue(text)),
   }));
 });
 

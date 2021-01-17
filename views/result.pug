@@ -13,19 +13,25 @@ html
 
     ul
       li EMC: <a href="https://zh.wikipedia.org/zh/User:Polyhedron/%E4%B8%AD%E5%8F%A4%E6%BC%A2%E8%AA%9E%E6%8B%BC%E9%9F%B3">polyhedron's system</a> modified
-      li yue: <a href="https://github.com/sumiq/romanize-zho#yue"> original</a>
-      li mandarin: <a href="https://github.com/sumiq/romanize-zho#mandarin">original</a>
+      li yue: <a href="https://github.com/xekri/romanize-zho#yue"> original</a>
+      li mandarin: <a href="https://github.com/xekri/romanize-zho#mandarin">original</a>
+
+    -
+      const d = {
+        "emc": "EMC",
+        "yue": "yue",
+        "yue-compressed": "yue (compressed)",
+        "cmn": "mandarin",
+        "cmn-bpmf": "mandarin (bopomofo)",
+      }
 
     .buttons
-      button(data-language="emc") EMC
-      button(data-language="yue").selected yue
-      button(data-language="yue-ascii") yue (ASCII)
-      button(data-language="cmn") mandarin
-      button(data-language="cmn-bpmf") mandarin (bopomofo)
+      for k in Object.keys(d)
+        button(data-language=k)= d[k]
 
     .languages
-      for data, i in [emc, yue, yueAscii, cmn, cmnBpmf,]
-        div(id=["emc", "yue", "yue-ascii", "cmn", "cmn-bpmf",][i], class=i == 1 ? "selected" : "").language
+      for data, i in [emc, yue, yueCompressed, cmn, cmnBpmf,]
+        div(id=Object.keys(d)[i], class=i == 1 ? "selected" : "").language
           div.ruby
             for datum in data
               if datum[1]
